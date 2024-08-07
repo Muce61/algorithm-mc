@@ -12,10 +12,28 @@ public class Test {
         change(123124, 10);
         oddNumber();
         findRightOne(12310);
-        findTwoODDNumber(num);
-        findKW(numTwo, 2, 3);
+//        test(num);
+        test(numTwo,  3);
     }
 
+    public static void test(int[] arr, int w) {
+        int[] nums = new int[32];
+        for (int num : arr) {
+            for (int i = 0;i < 32 ; i++) {
+                nums[i] += (num >> i) & 1;
+            }
+        }
+
+        int res = 0;
+        for (int i = 0;i < 32 ; i++) {
+            if (nums[i] % w != 0) {
+                res = res | (1 << i);
+            }
+        }
+
+        System.out.println(res);
+
+    }
     public static void change(int a, int b) {
         System.out.println("交换前： " + a + " " + b);
 

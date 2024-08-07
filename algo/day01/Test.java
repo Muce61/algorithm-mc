@@ -10,13 +10,13 @@ import java.util.stream.IntStream;
  **/
 public class Test {
     public static void main(String[] args) {
-        int dataSize = 100;
+        int dataSize = 20;
         int[] data = AlgorithmGenerator.generateRandomData(dataSize);
         System.out.println("原数组: " + Arrays.toString(data));
         // 记录开始时间
         long startTime = System.nanoTime();
         // 调用算法
-        int[] ints = test(data);
+        int[] ints = test(data, 1);
 
         // 记录结束时间
         long endTime = System.nanoTime();
@@ -28,18 +28,20 @@ public class Test {
         System.out.println("执行时间: " + duration);
     }
 
-    public static int[] test(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            int current = arr[i];
-            int j = i - 1;
-            while (j >= 0 && current < arr[j]) {
-                arr[j + 1] = arr[j];
-                j--;
+    public static int[] test(int[] arr, int num) {
+        int left = 0;
+        int right = arr.length;
+
+        while (left < right) {
+            int mid = (left + right)/2;
+            if (arr[mid] == num) {
+                break;
+            } else if (arr[mid] < num) {
+                right = mid - 1;
+            } else if (arr[mid] > num) {
+                left = mid + 1;
             }
-
-            arr[j + 1] = current;
         }
-
         return arr;
     }
 
